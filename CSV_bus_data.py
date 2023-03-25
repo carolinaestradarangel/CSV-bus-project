@@ -61,8 +61,6 @@ def route_data(r):
   conn.close()
   
 # route_data('22')
-
-
 def yr_sum(*years):
   """"This function takes input from the user and doesn't modify the file itself but looks through the file for specific years and takes the sum of rides for those specific years. It could look through one years of all of the years, it should hold for any case. 
   """
@@ -94,8 +92,6 @@ def my_func():
   list_of_avg_ride = []      
   for i in timeline:
     result = cur.execute("SELECT CEILING(AVG(rides)) FROM bus_data WHERE date LIKE '07/%/{}'".format(i))
-
-
     list_of_avg_ride.append(result.fetchall())
   # print(l)
   avg_ride = []
