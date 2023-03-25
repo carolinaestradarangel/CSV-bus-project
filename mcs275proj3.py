@@ -1,8 +1,4 @@
-# Carolina Estrada Rangel
-# cestra31@uic.edu
-# I hereby attest that I have adhered to the rules for quizzes and projects as well as UIC’s
-# Academic Integrity standards. Signed: carolina estrada rangel
-
+#Carolina Estrada
 import pandas 
 import sqlite3
 import numpy as np 
@@ -44,11 +40,6 @@ convert("bus_data.csv", "bus_data.db")
 #     conn.commit()
 #     conn.close()
 
-# answer questions:
-
-# how much memory did the csv take up?: it took up 19,854 KB of memory or about 19.39 MB of space. 
-# how much memory does the new database file take up?: it took about 56.7 MB 
-
 def route_data(r):
   conn = sqlite3.connect("bus_data.db")
   cur = conn.cursor()
@@ -59,7 +50,6 @@ def route_data(r):
   # conn.commit()
   # conn.close()
 
-#  this does the average of the daily rideships
 # route_data('22')
   high_rides = cur.execute("SELECT COUNT(*) FROM bus_data WHERE rides > 1200").fetchall()
   total_rides = cur.execute("SELECT COUNT(*) FROM bus_data").fetchall()
@@ -67,7 +57,6 @@ def route_data(r):
   # print(total_rides)
   
   print((high_rides[0][0]/total_rides[0][0])*100,'%')
-  # prints out the integer of the percent amount of high rides considered (being more than 1200) from the overall rides in database. 
   conn.commit()
   conn.close()
   
@@ -106,9 +95,7 @@ def my_func():
   for i in timeline:
     result = cur.execute("SELECT CEILING(AVG(rides)) FROM bus_data WHERE date LIKE '07/%/{}'".format(i))
 
-# the month of july was used because it was at one point the highest bus ride rate in 2008(stated by some article) , so I wanted to see how that would compare to every other year until present time. 
 
-# interestingly enough though the great recession in 2008 was the highest average ridership out of all the even years in the database and demonstrates how big the dip of ridership became during the pandemic. I did want to see a pattern of decline after the recession hit because I did think that would've affected the ridership, which it did show in the scatterplot. It Seems that the ridership has never been the same since the start of the pandemic two years later specifically even if it demonstrated the decline after 2008, the pandemic hit was severe for ridership. 
     list_of_avg_ride.append(result.fetchall())
   # print(l)
   avg_ride = []
@@ -122,14 +109,9 @@ def my_func():
   plt.savefig('average year comparison.png')
   conn.commit()
   conn.close()
-  
-  
 my_func()
-
 def update():
-
   convert("bus_data.csv", "bus_data_backup.db")
-  # using the first function to make a back up database before it's changed. 
   conn = sqlite3.connect("bus_data.db")
   cur = conn.cursor()
   update_rides = "UPDATE bus_data SET rides == floor(rides - (rides*.10)) WHERE daytype == 'A'"
@@ -142,8 +124,6 @@ def update():
   
   # conn.commit()
   # conn.close()
-
-  
 # update()
 
 # function below is to check if the data was actually changed in the db after the update. 
@@ -152,3 +132,4 @@ def update():
 #     select_data("SELECT * FROM bus_data")
 
 # showallbusdata()
+#comment and uncomment this to check everything works and data runs. 
